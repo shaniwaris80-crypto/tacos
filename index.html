@@ -137,13 +137,14 @@ button { font: inherit; color: inherit; }
 
 <script>
 const TACOS = [{"slug": "01-el-original", "n": "01", "nombre": "EL ORIGINAL"}, {"slug": "02-crispy-king", "n": "02", "nombre": "CRISPY KING"}, {"slug": "03-smash-burgos", "n": "03", "nombre": "SMASH BURGOS"}, {"slug": "04-bbq-explosion", "n": "04", "nombre": "BBQ EXPLOSION"}, {"slug": "05-fire-tacos", "n": "05", "nombre": "FIRE TACOS"}, {"slug": "06-kebab-king", "n": "06", "nombre": "KEBAB KING"}, {"slug": "07-crispy-brazil", "n": "07", "nombre": "CRISPY BRAZIL"}, {"slug": "08-chicken-duo", "n": "08", "nombre": "CHICKEN DUO"}, {"slug": "09-gratinado-supreme", "n": "09", "nombre": "GRATINADO SUPREME"}, {"slug": "10-hot-crispy", "n": "10", "nombre": "HOT CRISPY"}, {"slug": "11-mix-kebab", "n": "11", "nombre": "MIX KEBAB"}];
+const VERSION = '2';  /* súbelo al cambiar vídeos o pósters: obliga a los navegadores a pedir los nuevos */
 const visor = document.getElementById('visor'), video = document.getElementById('video'), pos = document.getElementById('pos');
 let actual = -1, origen = null;
 function mostrar(i) {
   actual = (i + TACOS.length) % TACOS.length;
   const t = TACOS[actual];
-  video.poster = 'posters/' + t.slug + '.jpg';
-  video.src = 'videos/' + t.slug + '.mp4';
+  video.poster = 'posters/' + t.slug + '.jpg?v=' + VERSION;
+  video.src = 'videos/' + t.slug + '.mp4?v=' + VERSION;
   video.setAttribute('aria-label', 'Lo que lleva ' + t.nombre);
   pos.textContent = t.n + ' / ' + String(TACOS.length).padStart(2, '0');
   const p = video.play(); if (p && p.catch) p.catch(() => {});
